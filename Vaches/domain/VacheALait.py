@@ -6,11 +6,14 @@ class VacheALait (Vache):
     PRODUCTION_LAIT_MAX:float=40.0
     lait_disponible:float
     lait_total_produit:float
-    laitTotalTraite:float
+    lait_total_traite:float
 
     def __init__(self, petit_nom, poids, age):
         super().__init__(petit_nom, poids, age)
         self.panse = 0.0
+        self.lait_total_produit = 0.0
+        self.lait_total_traite = 0.0
+        self.lait_disponible = 0.0
 
     def _calculer_lait(self, panse_avant):
         self.lait_disponible =  (panse_avant * self.RENDEMENT_LAIT)
@@ -22,8 +25,8 @@ class VacheALait (Vache):
     def ruminer(self):
         return super().ruminer()
 
-    def traire (self, lait):
-        self.lait_total_produit += lait
+    def traire (self, litres):
+        self.lait_total_produit += litres
         return self.lait_total_produit
 
     def __str__(self):
