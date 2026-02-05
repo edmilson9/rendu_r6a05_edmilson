@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./Strategies",
+        "./Vaches/domain"
+    ]
+}
