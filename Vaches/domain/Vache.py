@@ -58,10 +58,12 @@ class Vache:
         self.poids += lait
         
     
-    def _post_rumination(self):
+    def _post_rumination(self, panse_avant, lait):
         self.panse = 0.0
 
     def ruminer(self):
         self.valider_rumination_possible()
-        self._stocker_lait(self._calculer_lait(self.panse))
-        self._post_rumination()
+        panse_avant = self.panse
+        lait_p = self._calculer_lait(panse_avant)
+        self._stocker_lait(lait_p)
+        self._post_rumination(panse_avant, lait_p)
