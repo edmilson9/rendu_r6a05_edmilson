@@ -21,7 +21,7 @@ class Vache:
         self.valider_etat()
 
     def __str__(self):
-        return print(f"{self.id} La vache {self.petitn_om} a {self.age} et pèse {self.poids}" )
+        return print(f"{self.id} La vache {self.petit_nom} a {self.age} et pèse {self.poids}" )
     
     def valider_etat (self):
         if self.petit_nom.isspace() or self.petit_nom == "" or self.age <= 0 or self.poids <= 0 or self.poids > self.POIDS_MAX or self.age > self.AGE_MAX:
