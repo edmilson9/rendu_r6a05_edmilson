@@ -1,5 +1,7 @@
 from Strategies.InvalidVacheException import InvalidVacheException
 from Vaches.domain.Vache import Vache
+from Strategies.StandardMilkStrategy import StandardMilkStrategy
+
 
 class VacheALait (Vache):
     RENDEMENT_LAIT:float = 1.1
@@ -15,10 +17,10 @@ class VacheALait (Vache):
         self.lait_disponible = 0.0
 
     def _calculer_lait(self, panse_avant):
-        return panse_avant * self.RENDEMENT_LAIT
+        StandardMilkStrategy()._calculer_lait(self, panse_avant)
 
     def _stocker_lait(self, lait):
-        super()._stocker_lait(lait)
+        StandardMilkStrategy()._stocker_lait(self, lait)
         self.lait_total_produit += lait
         self.lait_disponible += lait
 

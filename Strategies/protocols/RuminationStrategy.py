@@ -1,9 +1,15 @@
-class RuminationStategy:
-    def _calculer_lait(self):
+from abc import abstractmethod
+
+class RuminationStrategy:
+
+    @abstractmethod
+    def _calculer_lait(self, vache_o, panse_avant):
         pass
     
-    def _stocker_lait(self):
+    @abstractmethod
+    def _stocker_lait(self, vache_o, lait):
         pass
         
-    def _post_rumination(self):
+    @abstractmethod    
+    def _post_rumination(self, vache_o, panse_avant, lait):
         pass

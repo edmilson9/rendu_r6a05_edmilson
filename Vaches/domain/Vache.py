@@ -1,7 +1,8 @@
 from Strategies.InvalidVacheException import InvalidVacheException
+from Strategies.NoMilkStrategy import NoMilkStrategy 
 import itertools
 
-class Vache:
+class Vache ():
     id_iter = itertools.count()
     AGE_MAX = 25
     POIDS_MAX = 1000.0
@@ -51,15 +52,15 @@ class Vache:
             raise InvalidVacheException("La rumination ne peut être effectue car la panse est vide")
 
     def _calculer_lait(self, panse_avant):
-        lait = self.RENDEMENT_RUMINATION * panse_avant
-        return lait
+        return NoMilkStrategy()._calculer_lait(self, panse_avant)
+         
     
     def _stocker_lait(self, lait):
-        self.poids += lait
+        NoMilkStrategy()._stocker_lait(self, lait)
         
     
     def _post_rumination(self, panse_avant, lait):
-        self.panse = 0.0
+        NoMilkStrategy()._post_rumination(self, panse_avant, lait)
 
     def ruminer(self):
         self.valider_rumination_possible()

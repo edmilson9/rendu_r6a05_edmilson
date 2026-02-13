@@ -1,12 +1,13 @@
 from Strategies.InvalidVacheException import InvalidVacheException
 from Vaches.domain.VacheALait import VacheALait
 from nourriture.TypeNourriture import TypeNourriture
+from typing import Dict
 
 class PieNoire (VacheALait):
     nb_taches_noires : int
     nb_taches_blanches : int
 
-    COEFFICIENT_NUTRITIONNEL: dict[TypeNourriture, float] = {
+    COEFFICIENT_NUTRITIONNEL: Dict[TypeNourriture, float] = {
         TypeNourriture.MARGUERITE: 1.1,
         TypeNourriture.HERBE: 1.0,
         TypeNourriture.FOIN: 0.9,
@@ -14,7 +15,7 @@ class PieNoire (VacheALait):
         TypeNourriture.CEREALES: 1.3,
     }
 
-    _ration : dict[TypeNourriture, float]
+    _ration : Dict[TypeNourriture, float]
 
     def __init__(self, petit_nom, poids, age, nb_taches_noires, nb_taches_blanches):
         self.nb_taches_blanches = nb_taches_blanches
@@ -24,7 +25,7 @@ class PieNoire (VacheALait):
         self.valider_etat()
         
     @property
-    def ration(self) -> dict[TypeNourriture, float]:
+    def ration(self) -> Dict[TypeNourriture, float]:
         return self._ration.copy()
 
     def brouter(self, quantite, nourriture=None):
