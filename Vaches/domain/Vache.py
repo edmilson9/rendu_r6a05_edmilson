@@ -1,5 +1,6 @@
 from Strategies.InvalidVacheException import InvalidVacheException
 from Strategies.NoMilkStrategy import NoMilkStrategy 
+from Strategies.protocols.RuminationStrategy import RuminationStrategy
 import itertools
 
 class Vache ():
@@ -13,16 +14,18 @@ class Vache ():
     panse:float = 0.0
     age:int
     RENDEMENT_RUMINATION:float=0.25
+    strategy : RuminationStrategy
 
-    def __init__(self, petit_nom, poids, age):
+    def __init__(self, petit_nom, poids, age, ):
         self.petit_nom = petit_nom
         self.age = age
         self.poids = poids
+        self.strategy = NoMilkStrategy()
         self.id = next(self.id_iter)
         self.valider_etat()
 
     def __str__(self):
-        return print(f"{self.id} La vache {self.petit_nom} a {self.age} et pèse {self.poids}" )
+        return f"{self.id} La vache {self.petit_nom} a {self.age} et pèse {self.poids}"
     
     def valider_etat (self):
         if self.petit_nom.isspace() or self.petit_nom == "" or self.age <= 0 or self.poids <= 0 or self.poids > self.POIDS_MAX or self.age > self.AGE_MAX:
@@ -52,15 +55,15 @@ class Vache ():
             raise InvalidVacheException("La rumination ne peut être effectue car la panse est vide")
 
     def _calculer_lait(self, panse_avant):
-        return NoMilkStrategy()._calculer_lait(self, panse_avant)
+        return self.strategy._calculer_lait(self, panse_avant)
          
     
     def _stocker_lait(self, lait):
-        NoMilkStrategy()._stocker_lait(self, lait)
+        self.strategy._stocker_lait(self, lait)
         
     
     def _post_rumination(self, panse_avant, lait):
-        NoMilkStrategy()._post_rumination(self, panse_avant, lait)
+        self.strategy._post_rumination(self, panse_avant, lait)
 
     def ruminer(self):
         self.valider_rumination_possible()

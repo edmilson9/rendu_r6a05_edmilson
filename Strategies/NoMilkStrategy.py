@@ -3,8 +3,7 @@ from Strategies.protocols.RuminationStrategy import RuminationStrategy
 class NoMilkStrategy(RuminationStrategy):
 
     def _calculer_lait(self, vache_o, panse_avant):
-        lait = vache_o.RENDEMENT_RUMINATION * panse_avant
-        return lait
+        return vache_o.RENDEMENT_RUMINATION * panse_avant
     
     def _stocker_lait(self, vache_o, lait):
         vache_o.poids += lait

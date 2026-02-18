@@ -11,18 +11,17 @@ class VacheALait (Vache):
     lait_total_traite:float
 
     def __init__(self, petit_nom, poids, age):
-        super().__init__(petit_nom, poids, age)
+        super().__init__(petit_nom, poids, age)    
+        self.strategy = StandardMilkStrategy()
         self.lait_total_produit = 0.0
         self.lait_total_traite = 0.0
         self.lait_disponible = 0.0
 
     def _calculer_lait(self, panse_avant):
-        StandardMilkStrategy()._calculer_lait(self, panse_avant)
+       return self.strategy._calculer_lait(self, panse_avant)
 
     def _stocker_lait(self, lait):
-        StandardMilkStrategy()._stocker_lait(self, lait)
-        self.lait_total_produit += lait
-        self.lait_disponible += lait
+        self.strategy._stocker_lait(self, lait)
 
     def ruminer(self):
         if self.lait_disponible> self.PRODUCTION_LAIT_MAX :
